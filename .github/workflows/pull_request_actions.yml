@@ -68,28 +68,28 @@ jobs:
         run: terragrunt run-all plan -no-color --terragrunt-non-interactive
         continue-on-error: true
 
-apply:
-  name: "Terragrunt Apply"
-  if: github.event_name == "push"
-  runs-on: ubuntu-24.04
-    defaults:
-      run:
-      working-directory:${{env.TERRAFORM_WORKING_DIR}} 
+  apply:
+   name: "Terragrunt Apply"
+   if: github.event_name == "push"
+   runs-on: ubuntu-24.04
+   defaults:
+     run:
+     working-directory:${{env.TERRAFORM_WORKING_DIR}} 
     
    steps:
-      - name: "Checkout"
-        uses: actions/checkout@v4
-        with: 
-          ref: ${{github.event.pull_request.head.ref}}
+     - name: "Checkout"
+       uses: actions/checkout@v4
+       with:
+         ref: ${{github.event.pull_request.head.ref}}
 
-      - name: Install Terraform
-        uses: hashicorp/setup-terraform@v3
-        with: 
-            terraform_version: ${{ env.TERRAFORM_VERSION}}
+     - name: Install Terraform
+       uses: hashicorp/setup-terraform@v3
+       with: 
+          terraform_version: ${{ env.TERRAFORM_VERSION}}
         id: init
         run: terragrunt run-all init -no-color --terragrunt-non-interactive
-
-      - name: Terragrunt Apply
+      
+     - name: Terragrunt Apply
         id: apply
         run: terragrunt run-all Apply -no-color --terragrunt-non-interactive
         continue-on-error: true
