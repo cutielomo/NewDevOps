@@ -12,7 +12,7 @@ on:
 env:
   TERRAFORM_VERSION: 1.7.2
   TERRAGRUNT_VERSION: 0.56.0
-  TERRAGRUNT_WORKING_DIR:'./applied/za'
+  TERRAGRUNT_WORKING_DIR: './applied/za'
   
 permissions:
   contents: write
