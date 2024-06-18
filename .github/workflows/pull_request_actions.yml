@@ -12,7 +12,7 @@ on:
 env:
   TERRAFORM_VERSION: 1.7.2
   TERRAGRUNT_VERSION: 0.56.0
-  TERRAGRUNT_WORKING_DIR: './applied/za'
+  TERRAGRUNT_WORKING_DIR: "./applied/za"
   
 permissions:
   contents: write
@@ -74,7 +74,7 @@ jobs:
         runs-on: ubuntu-24.04 
          defaults:
       run:
-        working-directory: ${{ env.TERRAFORM_WORKING_DIR}}
+        working-directory: ${{env.TERRAFORM_WORKING_DIR}}
 
         steps:
       - name: "checkout"
@@ -85,22 +85,22 @@ jobs:
       - name: Install Terraform
         uses: hashicorp/setup-terraform@v3
         with: 
-          terraform_version: " ${{ env.TERRAFORM_VERSION}}"
+          terraform_version: ${{env.TERRAFORM_VERSION}}
           terraform_wrapper: true
 
       - name: Install Terragrunt
         uses: auterol/action-terraform@v3
         with: 
-          terraform_version: ${{ env. TERRAGRUNT_VERSION}
+          terraform_version: ${{env. TERRAGRUNT_VERSION}
 
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v4
         with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-access-key-id: ${{secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: us-east-1
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN}}
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
 
       - name: Terragrunt init
         id: init
